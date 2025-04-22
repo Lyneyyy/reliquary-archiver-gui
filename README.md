@@ -1,7 +1,8 @@
 # reliquary-archiver-gui
 A gui for [@IceDynamix/reliquary-archiver](https://github.com/IceDynamix/reliquary-archiver) Its a GUI for the terminal based tool to create a relic export from network packets of a certain turn-based anime game 
 
-![main_b6pEHeJ4oW](https://github.com/user-attachments/assets/b772606a-0f00-4675-8390-586989a442ee)
+![main_eQ3cY36WpX](https://github.com/user-attachments/assets/2f8246a9-9030-4ef1-bc80-fe7cb93b1b8e)
+
 
 # Features
 - Check and install npcap for the user.
