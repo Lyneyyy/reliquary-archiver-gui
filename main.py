@@ -40,6 +40,7 @@ def check_npcap():
 def check_rel():
     if os.path.isfile(r"reliquary-archiver_x64.exe") == False:
         dpg.configure_item("dl_ra", show=True)
+        dpg.configure_item("npcap", show=False)     
     else:
         dpg.set_viewport_width(600) 
         dpg.set_viewport_height(550) 
