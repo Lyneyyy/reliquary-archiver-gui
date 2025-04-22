@@ -28,7 +28,8 @@ def npcap_install():
     check_npcap()
     
 def npcap_download():
-    os.system("start curl -o npcap-1.81.exe https://npcap.com/dist/npcap-1.81.exe && npcap-1.81.exe")
+    # using /k because it wait for the download to finish before starting the program, because windows shell is ✨ M A G I C ✨
+    os.system("start cmd /k \"curl -o npcap-1.81.exe https://npcap.com/dist/npcap-1.81.exe & npcap-1.81.exe & exit\"")
 
 def check_npcap():
     if os.path.isfile(r"C:\Windows\System32\Npcap\wpcap.dll") == False:
@@ -46,7 +47,7 @@ def check_rel():
         dpg.configure_item("npcap", show=False)     
         dpg.configure_item("main_ui", show=True)    
         
-def download_ra():
+def download_ra():  
     os.system("start powershell curl -o reliquary-archiver_x64.exe https://github.com/IceDynamix/reliquary-archiver/releases/download/v0.4.0/reliquary-archiver_x64.exe")
 
 def open_hsr():
@@ -69,8 +70,11 @@ def open_archive():
 
 
 dpg.create_context()
+
+with dpg.font_registry():
+    default_font = dpg.add_font(resource_path("Roboto-Regular.ttf"), 16)
+
 with dpg.window(tag="Primary Window"):
-    
     with dpg.group(tag="wlc"):
         dpg.add_text("Reliquary Archiver GUI")
         dpg.add_text("""A tool to create a relic export from network packets of a certain turn-based anime game. \n\nThis setup will prepare your system to run Reliquary Archiver, it will firstly verify if npcap is installed, if not it will install it.""", wrap=550)
@@ -96,8 +100,6 @@ with dpg.window(tag="Primary Window"):
             dpg.add_button(label="Download and start setup >", callback=npcap_download)
             dpg.add_button(label="Next >", callback=check_npcap)
         
-        dpg.add_text("*The setup window will be minimzed by default")
-
     with dpg.group(tag="dl_ra", show=False):
         dpg.add_text("Reliquary Archiver GUI")
         dpg.add_text("The system is ready to use reliquary archiver, it will now download it", wrap=550)
@@ -125,8 +127,6 @@ with dpg.window(tag="Primary Window"):
             dpg.add_button(label="2. Start reliquary-archiver", callback=lambda: os.system("start reliquary-archiver_x64.exe"), height=40)
             dpg.add_button(label="3. View archive file", callback=open_archive, height=40, tag="view_file")
 
-    
-    
     # The popup is now attached to the window rather than the text
     with dpg.popup(parent="view_file", modal=True, tag="warning_file"):
         dpg.add_text("archiver_output.json not found, please run reliquary-archiver before.")
@@ -136,7 +136,9 @@ with dpg.window(tag="Primary Window"):
         dpg.add_text("HSR (Hoyoplay) not found, please manually run the game.")
         dpg.add_button(label="Close", callback=lambda: dpg.configure_item("warning_game", show=False))
 
-dpg.create_viewport(title='Reliquary Archiver GUI', width=600, height=200)
+    dpg.bind_font(default_font)
+
+dpg.create_viewport(title='Reliquary Archiver GUI', width=600, height=260)
 dpg.setup_dearpygui()
 dpg.show_viewport()
 dpg.set_primary_window("Primary Window", True)
