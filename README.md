@@ -12,3 +12,10 @@ A gui for [@IceDynamix/reliquary-archiver](https://github.com/IceDynamix/reliqua
 # How to use ?
 1. Download reliquary-archiver-gui from the releases
 2. Launch the executable and follow the intrusction
+
+# Run from source
+To run from source you only need dearpygui **and the files** (hsr_hyperdrive.jpg, Roboto-Regular.ttf)
+```
+pip install dearpygui
+python main.py
+```
